@@ -19,6 +19,7 @@ Options:
 }
 
 func main() {
+	port := "8080"
 	if len(os.Args) > 1 {
 		switch os.Args[1] {
 		case "--help":
@@ -28,13 +29,13 @@ func main() {
 				fmt.Println("Ошибка: укажите порт после --port")
 				os.Exit(1)
 			}
+			port = os.Args[2]
 		default:
 			fmt.Println("Неизвестный флаг:", os.Args[1])
 			printHelp()
 		}
 	}
 
-	port := "8080"
 	if len(os.Args) > 2 && os.Args[1] == "-port" {
 		port = os.Args[2]
 	}

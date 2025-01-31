@@ -57,7 +57,7 @@ func (s *Server) proccessComand(request string) string {
 	args := strings.Split(request, " ")
 
 	if len(args) == 0 {
-		return "(error) empty command"
+		return "(error) empty command\n"
 	}
 
 	switch strings.ToLower(args[0]) {
@@ -84,12 +84,12 @@ func (s *Server) handleSet(args []string) string {
 	for i := 2; i < len(args); i++ {
 		if strings.ToUpper(args[i]) == "PX" {
 			if i+1 >= len(args) {
-				return "(error) ERR syntax error in PX"
+				return "(error) ERR syntax error in PX\n"
 			}
 
 			pxValue, err := time.ParseDuration(args[i+1] + "ms")
 			if err != nil || pxValue <= 0 {
-				return "(error) ERR invalid PX value"
+				return "(error) ERR invalid PX value\n"
 			}
 			ttl = pxValue
 			break
@@ -113,7 +113,7 @@ func (s *Server) handleSet(args []string) string {
 
 func (s *Server) handleGet(args []string) string {
 	if len(args) != 2 {
-		return "(error) ERR wrong number of arguments for 'GET' command"
+		return "(error) ERR wrong number of arguments for 'GET' command\n"
 	}
 
 	key := args[1]
